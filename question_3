@@ -1,0 +1,61 @@
+class Demo {
+    //静态代码块1
+    static {
+        int a=10;
+        System.out.println(a);
+    }
+
+    //静态代码块2
+    static {
+        System.out.println("静态代码块");
+    }
+
+    //构造代码块1
+    {
+        int b=100;
+        System.out.println(b);
+    }
+
+    //构造代码块2
+    {
+        System.out.println("构造代码块");
+    }
+    
+    //构无参造方法
+    public Demo(){
+        System.out.println("无参构造方法");
+    }
+    
+    //有参构造方法
+    public Demo(String name){
+        System.out.println("有参构造方法:"+name);
+    }
+}
+
+
+class Demotest{
+    static {
+        System.out.println("测试静态代码块");    //测试类中的静态方法先执行
+    }
+
+    {
+        System.out.println("测试构造代码块");  //测试类中的构造方法块不执行
+    } 
+
+    public static void main(String[] args) {
+    
+        System.out.println("我是main方法");
+
+        //局部代码块(局部代码块仅在方法内)
+        {
+            int c=1000;
+            System.out.println(c);
+        }
+
+        Demo d = new Demo();   //1000(执行局部代码块，仅一次)、10(执行静态代码块，仅一次)、100(执行构造代码块)、无参构造方法(无参构造方法)
+        System.out.println("----------------");
+        Demo d1 = new Demo("zt");   //100(执行构造代码块)、构造代码块(构造代码块)、有参构造方法:zt(有参构造方法)         【局部代码块和静态代码块只执行一次】
+        System.out.println("----------------");
+        Demo d2 = new Demo();   //100(执行构造代码块)、构造代码块(构造代码块)、无参构造方法(无参构造方法)
+    }
+}
